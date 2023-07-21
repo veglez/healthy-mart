@@ -10,6 +10,8 @@ services:
     depends_on:
       - database
     restart: always
+    volumes:
+      - ./apps/api/:/app/apps/api/
   database: # TODO: Add env file
     container_name: db
     image: mongo

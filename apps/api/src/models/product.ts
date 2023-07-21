@@ -21,20 +21,20 @@ class ProductClass {
   @prop()
   public score?: number;
 
-  // @prop({ type: () => [Review] })
-  // public reviews?: ArraySubDocumentType<Review>[];
+  @prop({ type: () => [Review] })
+  public reviews?: ArraySubDocumentType<Review>[];
 }
 
-// class Review extends TimeStamps {
-//   @prop({ ref: () => UserClass })
-//   public user!: Ref<UserClass>;
+class Review extends TimeStamps {
+  @prop({ ref: () => UserClass })
+  public user!: Ref<UserClass>;
 
-//   @prop({ required: true })
-//   public score!: number;
+  @prop({ required: true })
+  public score!: number;
 
-//   @prop({ required: true })
-//   public comment!: string;
-// }
+  @prop({ required: true })
+  public comment!: string;
+}
 
 export default ProductClass;
 

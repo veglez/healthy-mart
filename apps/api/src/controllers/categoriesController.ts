@@ -34,10 +34,10 @@ export const getCategoryById = async (req: Request, res: Response) => {
 
 // POST /categories
 export const createCategory = async (req: Request, res: Response) => {
-    const { name, image } = req.body;
-
+    const { name, image } = req.body
+    const category = { name, image }
     try {
-        const newCategory = await createCategoryService({ name, image });
+        const newCategory = await createCategoryService(category);
         res.status(201).json(newCategory);
     } catch (error) {
         res.status(500).json({ error: "Internal server error" });
@@ -47,10 +47,10 @@ export const createCategory = async (req: Request, res: Response) => {
 // PUT /categories/:id
 export const updateCategory = async (req: Request, res: Response) => {
     const { id } = req.params;
-    const { name, image } = req.body;
-
+    const { name, image } = req.body
+    const category = { name, image }
     try {
-        const updatedCategory = await updateCategoryService(id, { name, image });
+        const updatedCategory = await updateCategoryService(id, category);
         if (!updatedCategory) {
             return res.status(404).json({ error: "Category not found" });
         }

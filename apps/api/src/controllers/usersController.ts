@@ -34,16 +34,11 @@ export const getUserById = async (req: Request, res: Response) => {
 
 // POST /users
 export const createUser = async (req: Request, res: Response) => {
-  const { name, email, password, phone, lastName } = req.body;
-
+  const { name, lastName, email, password, phone } = req.body
+  const user = { name, lastName, email, password, phone }
   try {
-    const newUser = await createUserService({
-      name,
-      lastName,
-      email,
-      password,
-      phone,
-    });
+    const newUser = await createUserService(user);
+    console.log("Creando usuario...")
     res.status(201).json(newUser);
   } catch (error) {
     res.status(500).json({ error: "Internal server error" });
@@ -53,16 +48,11 @@ export const createUser = async (req: Request, res: Response) => {
 // PUT /users/:id
 export const updateUser = async (req: Request, res: Response) => {
   const { id } = req.params;
-  const { name, lastName, email, password, phone } = req.body;
+  const { name, lastName, email, password, phone } = req.body
+  const user = { name, lastName, email, password, phone }
 
   try {
-    const updatedUser = await updateUserService(id, {
-      name,
-      lastName,
-      email,
-      password,
-      phone,
-    });
+    const updatedUser = await updateUserService(id, user);
     if (!updatedUser) {
       return res.status(404).json({ error: "User not found" });
     }
